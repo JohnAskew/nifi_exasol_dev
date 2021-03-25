@@ -1,4 +1,9 @@
 {
+"providence":[
+{
+"template":"basic_monitoring","platform":"production","author":"J. Askew", "Date_Updated":"2020-03-25"
+}
+],
 "data":[
 {
 "exasol_conn":"exasol_conn", "mqtt_conn":"mqtt_conn", "query":"select to_char(interval_start, \" || chr(39) ||\"YYYY-MM-DD HH:MI:SS\" || chr(39) || \"), cpu_max from exa_monitor_hourly order by interval_start desc limit 1;","metric":"cpu_max", "warning": 5.0, "critical": 10.0
