@@ -1,15 +1,40 @@
 {
-"providence":[
+"provenance":[
 {
-"template":"basic_monitoring","platform":"production","author":"J. Askew", "Date_Updated":"2020-03-25"
+"template":"monitoring_demo","platform":"production","author":"J. Askew", "Date_Updated":"2020-03-25"
 }
 ],
-"data":[
+"prod":[
 {
-"exasol_conn":"exasol_conn", "mqtt_conn":"mqtt_conn", "query":"select to_char(interval_start, \" || chr(39) ||\"YYYY-MM-DD HH:MI:SS\" || chr(39) || \"), cpu_max from exa_monitor_hourly order by interval_start desc limit 1;","metric":"cpu_max", "warning": 5.0, "critical": 10.0
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), cpu_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'cpu_max'", "warning": 5.0, "critical": 6.0
 },
 {
-"exasol_conn":"exasol_conn", "mqtt_conn":"mqtt_conn", "query":"select to_char(interval_start, \" || chr(39) ||\"YYYY-MM-DD HH:MI:SS\" || chr(39) || \"), swap from exa_monitor_hourly order by interval_start desc limit 1;","metric":"swap", "warning": 0.01, "critical": 0.01
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,  '|| chr(39) || 'YYYY-MM-DD HH:MI:SS' || chr(39) || '), swap_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'swap_max'", "warning": 0.01, "critical": 0.01
+},
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(dsl.measure_time, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), (dsl.recommended_db_ram_size - esa.db_ram_size)  from exa_db_size_last_day dsl,exa_system_events esa where dsl.measure_time = select max(dsl.measure_time) from exa_db_size_last_day dsl and esa.measure_time  = select max(esa.measure_time) from exa_system_events esa and dsl.measure_time > esa.measure_time order by dsl.measure_time desc limit 1'","metric":"'db_ram_incr'", "warning": 0.01, "critical": 20
+},
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), hdd_read_avg from exa_monitor_hourly where interval_start = (select max(interval_start) from exa_monitor_hourly)'","metric":"'hdd_read_avg'", "warning": 0.01, "critical": 0.02
+},
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), net_max from exa_monitor_hourly where interval_start = (select max(interval_start) from exa_monitor_hourly)'","metric":"'net_max'", "warning": 0.01, "critical": 0.02
+}
+],
+"qa": [
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), cpu_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'cpu_max'", "warning": 5.0, "critical": 10.0
+},
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,  '|| chr(39) || 'YYYY-MM-DD HH:MI:SS' || chr(39) || '), swap_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'swap_max'", "warning": 0.01, "critical": 0.01
+}
+],
+"dev" :[
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), cpu_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'cpu_max'", "warning": 5.0, "critical": 10.0
+},
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,  '|| chr(39) || 'YYYY-MM-DD HH:MI:SS' || chr(39) || '), swap_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'swap_max'", "warning": 0.01, "critical": 0.01
 }
 ]
 }
