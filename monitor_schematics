@@ -9,6 +9,9 @@
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), cpu_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'cpu_max'", "warning": 5.0, "critical": 6.0
 },
 {
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), temp_db_ram_avg from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'temp_db_ram_max'", "warning": 1500.0, "critical": 1900
+},
+{
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,  '|| chr(39) || 'YYYY-MM-DD HH:MI:SS' || chr(39) || '), swap_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'swap_max'", "warning": 0.01, "critical": 0.01
 },
 {
@@ -18,7 +21,7 @@
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), hdd_read_avg from exa_monitor_hourly where interval_start = (select max(interval_start) from exa_monitor_hourly)'","metric":"'hdd_read_avg'", "warning": 0.01, "critical": 0.02
 },
 {
-"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), net_max from exa_monitor_hourly where interval_start = (select max(interval_start) from exa_monitor_hourly)'","metric":"'net_max'", "warning": 0.01, "critical": 0.02
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), net_max from exa_monitor_hourly where interval_start = (select max(interval_start) from exa_monitor_hourly)'","metric":"'net_max'", "warning": 1.0, "critical": 4.0
 },
 {
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), max(duration_max) from ' || chr(34) || '$EXA_PROFILE_HOURLY'||chr(34) ||' where interval_start = (select max(interval_start) from '|| chr(34) || '$EXA_PROFILE_HOURLY'||chr(34) ||') group by interval_start'","metric":"'commit_max'", "warning": 2, "critical": 5
