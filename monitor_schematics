@@ -6,9 +6,6 @@
 ],
 "prod":[
 {
-"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'flush statistics'","metric":"'noop'", "warning": 101.0, "critical": 102.0
-},
-{
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start, '|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), cpu_max from exa_monitor_hourly order by interval_start desc limit 1'","metric":"'cpu_max'", "warning": 50.0, "critical": 75.0
 },
 {
@@ -31,6 +28,9 @@
 },
 {
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), max(net_max)from exa_sql_hourly where interval_start = (select max(interval_start) from exa_sql_hourly) group by interval_start order by interval_start desc limit 1'","metric":"'sql_net_max'", "warning": 1.0, "critical": 4.0
+},
+{
+"exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), max(duration_max) from ' || chr(34) || '$EXA_PROFILE_HOURLY'||chr(34) ||' where interval_start = (select max(interval_start) from '|| chr(34) || '$EXA_PROFILE_HOURLY'||chr(34) ||') and part_name = ' || chr(39) || 'COMPILE' || chr(39) || ' group by interval_start order by interval_start desc limit 1'","metric":"'compile_max'", "warning": 2, "critical": 5
 },
 {
 "exasol_conn":"'exasol_conn'", "mqtt_conn":"'mqtt_conn'", "query":"'select to_char(interval_start,'|| chr(39) || 'YYYY-MM-DD HH:MI:SS'|| chr(39) || '), max(duration_max) from ' || chr(34) || '$EXA_PROFILE_HOURLY'||chr(34) ||' where interval_start = (select max(interval_start) from '|| chr(34) || '$EXA_PROFILE_HOURLY'||chr(34) ||') group by interval_start'","metric":"'commit_max'", "warning": 2, "critical": 5
